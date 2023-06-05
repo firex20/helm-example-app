@@ -1,0 +1,61 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}-nginx-deployment
+  labels:
+    app: {{ .Values.appname }}
+spec:
+  revisionHistoryLimit: 3
+  strategy:
+    type: RollingUpdate
+  replicas: {{ .Values.nginx.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ .Values.appname }}
+  template:
+    metadata:
+      name: {{ .Release.Name }}-nginx-pod
+      labels:
+        app: {{ .Values.appname }}
+        service: web
+    spec:
+      containers:
+      - image: {{ .Values.nginx.image.repository }}
+        name: {{ .Release.Name }}-nginx-container
+        imagePullPolicy: {{ .Values.nginx.image.pullPolicy }}
+        resources:
+          limits:
+            cpu: {{ .Values.nginx.resources.limits.cpu }}
+            memory: {{ .Values.nginx.resources.limits.memory }}
+          requests:
+            cpu: {{ .Values.nginx.resources.requests.cpu }}
+            memory: {{ .Values.nginx.resources.requests.memory }}
+        ports:
+        - name: http
+          containerPort: 80
+        volumeMounts:
+        - name: web-dir
+          mountPath: /usr/share/nginx/html
+        - name: nginx-config
+          mountPath: /etc/nginx/conf.d
+        env:
+          - name: SERVER_NAME
+            value: {{ .Values.server-name }}
+      initContainers:
+      - name: git-cloner
+        image: alpine/git
+        args:
+          - clone
+          - --single-branch
+          - --
+          - {{ .Values.web-git-repo }}
+          - /data
+        volumeMounts:
+        - mountPath: /data
+          name: web-dir
+      volumes:
+      - name: web-dir
+        emptyDir: {}
+      - name: nginx-config
+        configMap:
+          name: nginx-config

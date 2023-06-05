@@ -1,0 +1,53 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name}}-php-deployment
+  labels:
+    app: php
+spec:
+  revisionHistoryLimit: 3
+  strategy:
+    type: RollingUpdate
+  replicas: 1
+  selector:
+    matchLabels:
+      app: php
+  template:
+    metadata:
+      name: {{ .Release.Name}}-php-pod
+      labels:
+        app: php
+        service: web
+    spec:
+      containers:
+      - image: {{ .Values.php.image.repository }}
+        name: {{ .Release.Name}}-php-container
+        imagePullPolicy: {{ .Values.php.image.pullPolicy }}
+        resources:
+          limits:
+            cpu: {{ .Values.php.resources.limits.cpu }}
+            memory: {{ .Values.php.resources.limits.memory }}
+          requests:
+            cpu: {{ .Values.php.resources.requests.cpu }}
+            memory: {{ .Values.php.resources.requests.memory }}
+        ports:
+        - name: php
+          containerPort: 9000
+        volumeMounts:
+        - name: web-dir
+          mountPath: /app
+      initContainers:
+      - name: git-cloner
+        image: alpine/git
+        args:
+          - clone
+          - --single-branch
+          - --
+          - {{ .Values.php-git-repo }}
+          - /data
+        volumeMounts:
+        - mountPath: /data
+          name: web-dir
+      volumes:
+      - name: web-dir
+        emptyDir: {}
