@@ -4,11 +4,11 @@
 
 appname: mensajeria
 
-server-name: mensajeria.pmolden.es
+server_name: mensajeria.pmolden.es
 
-web-git-repo: https://github.com/firex20/mensajeria-react-build.git
+web_git_repo: https://github.com/firex20/mensajeria-react-build.git
 
-php-git-repo: https://github.com/firex20/mensajeria-react-build.git
+php_git_repo: https://github.com/firex20/mensajeria-react-build.git
 
 nginx:
   replicaCount: 1

@@ -40,7 +40,7 @@ spec:
           mountPath: /etc/nginx/conf.d
         env:
           - name: SERVER_NAME
-            value: {{ .Values.server-name }}
+            value: {{ .Values.server_name }}
       initContainers:
       - name: git-cloner
         image: alpine/git
@@ -48,7 +48,7 @@ spec:
           - clone
           - --single-branch
           - --
-          - {{ .Values.web-git-repo }}
+          - {{ .Values.web_git_repo }}
           - /data
         volumeMounts:
         - mountPath: /data

@@ -43,7 +43,7 @@ spec:
           - clone
           - --single-branch
           - --
-          - {{ .Values.php-git-repo }}
+          - {{ .Values.php_git_repo }}
           - /data
         volumeMounts:
         - mountPath: /data
