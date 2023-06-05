@@ -32,7 +32,7 @@ spec:
             memory: {{ .Values.mariadb.resources.requests.memory }}
         env:
         - name: MYSQL_ROOT_PASSWORD
-          value: {{ .Values.mariadb.root-pass }}
+          value: {{ .Values.mariadb.root_pass }}
         ports:
         - name: mariadb
           containerPort: 3306

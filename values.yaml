@@ -56,4 +56,4 @@ mariadb:
     requests:
       cpu: 500m
       memory: 256Mi
-  root-pass: admin
+  root_pass: admin
