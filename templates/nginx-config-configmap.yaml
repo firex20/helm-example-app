@@ -7,7 +7,7 @@ data:
     server {
       listen       80;
       listen  [::]:80;
-      server_name  $ENV{"SERVER_NAME"};
+      server_name  app.server;
       index index.html index.htm;
 
       #access_log  /var/log/nginx/host.access.log  main;
