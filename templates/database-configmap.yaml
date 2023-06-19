@@ -38,10 +38,10 @@ data:
     -- Volcado de datos para la tabla `mensajes`
     --
     
-    INSERT INTO `mensajes` (`id`, `remitente`, `destinatario`, `asunto`, `cuerpo`) VALUES
-    (1, 'Pepe', 'ana', 'Cumpleaños', 'Hola ana te invito a mi fiesta de cumpleaños, un saludo.'),
-    (2, 'ana', 'Pepe', 'Felicidades!', 'Felicidades, alli estare, un saludo.'),
-    (19, 'Pepe', 'ana', 'vrd', 'WRD');
+    INSERT INTO `mensajes` (`id`, `remitente`, `destinatario`, `asunto`, `cuerpo`, `estado`) VALUES
+    (1, 'Pepe', 'ana', 'Cumpleaños', 'Hola ana te invito a mi fiesta de cumpleaños, un saludo.', 3),
+    (2, 'ana', 'Pepe', 'Felicidades!', 'Felicidades, alli estare, un saludo.', 3),
+    (19, 'Pepe', 'ana', 'vrd', 'WRD', 3);
     
     -- --------------------------------------------------------
 
