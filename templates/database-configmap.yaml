@@ -93,7 +93,9 @@ data:
 
     INSERT INTO `usuarios` (`nombre`, `clave`, `nombreCompleto`) VALUES
     ('pepe', '1234', 'José Pérez'),
-    ('ana', '4321', 'ana sanchez'),
+    ('ana', '4321', 'Ana Sanchez'),
+    ('carlos', '1234', 'Carlos Areces'),
+    ('makinito', '1234', 'Makinito Lopez'),
     ('juan', '6789', 'Juan Martín');
 
     --
